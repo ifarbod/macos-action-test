@@ -1,0 +1,25 @@
+# Copyright (c) 2023-2024 iFarbod. All Rights Reserved.
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - "**.md"
+
+jobs:
+  windows-x86-build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # run a shallow clone
+
+      - name: Build
+        run: clang -dumpmachine && clang a.cpp
+        
