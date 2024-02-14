@@ -12,8 +12,8 @@ on:
       - "**.md"
 
 jobs:
-  windows-x86-build:
-    runs-on: windows-latest
+  macos-build:
+    runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v4
