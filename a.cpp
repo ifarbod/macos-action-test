@@ -1,7 +1,7 @@
-#include <cstdio>
+#include <assert.h>
 
-int main()
-{
-  printf("from macos\n");
+int main() {
+  bool b = false;
+  assert(b && "Hery");
   return 0;
 }
