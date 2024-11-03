@@ -13,13 +13,15 @@ on:
 
 jobs:
   macos-build:
-    runs-on: macos-latest
+    runs-on: macos-15
 
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # run a shallow clone
 
+      - name: Check Clang
+        run: clang --version
       - name: Build
         run: clang --target=arm64e-apple-darwin -E -dM a.cpp | grep -i ztl | sort
         
