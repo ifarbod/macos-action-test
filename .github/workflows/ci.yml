@@ -22,6 +22,10 @@ jobs:
 
       - name: Check Clang
         run: clang --version
+      - name: Check Clang -m64
+        run: clang -m64 --version
+      - name: Check Clang -m32
+        run: clang -m32 --version
       - name: Build
         run: clang --target=arm64e-apple-darwin -E -dM a.cpp | grep -i ztl | sort
         
