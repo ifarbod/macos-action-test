@@ -22,4 +22,5 @@ jobs:
 
       - name: Compile
         run: |
-          clang -v a.cpp -o a
+          clang++ -v -o HelloWorld main.mm -framework Cocoa
+
