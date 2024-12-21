@@ -20,11 +20,10 @@ jobs:
         with:
           fetch-depth: 0 # run a shallow clone
 
-      - name: Create ZIP package
+      - name: Compile
         run: |
-          ls -la /Applications/Xcode.app/Contents/Developer/Platforms
-          SDK_PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
-          zip -r iPhoneOS_sdk.zip "$SDK_PATH"
+          clang -v a.cpp -o a
+
 
       - name: Upload SDK package as artifact
         uses: actions/upload-artifact@v4
