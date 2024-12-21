@@ -22,7 +22,8 @@ jobs:
 
       - name: Create ZIP package
         run: |
-          SDK_PATH="Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
+          ls -la /Applications/Xcode.app/Contents/Developer/Platforms
+          SDK_PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
           zip -r iPhoneOS_sdk.zip "$SDK_PATH"
 
       - name: Upload SDK package as artifact
