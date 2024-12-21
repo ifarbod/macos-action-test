@@ -26,12 +26,11 @@ jobs:
       - name: Create ZIP package
         run: |
           SDK_PATH="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
-          cd "$SDK_PATH"
-          zip -r macos_sdk.zip .
+          zip -r macos_sdk.zip "$SDK_PATH"
           mv macos_sdk.zip $GITHUB_WORKSPACE
 
       - name: Upload SDK package as artifact
         uses: actions/upload-artifact@v4
         with:
           name: macos-sdk-package
-          path: $GITHUB_WORKSPACE/macos_sdk.zip
+          path: macos_sdk.zip
