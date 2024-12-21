@@ -21,4 +21,4 @@ jobs:
           fetch-depth: 0 # run a shallow clone
 
       - name: Check Clang
-        run: ls -la /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX
+        run: ls -la /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
