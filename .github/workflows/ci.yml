@@ -20,16 +20,13 @@ jobs:
         with:
           fetch-depth: 0 # run a shallow clone
 
-      - name: Check Clang
-        run: ls -la /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
-
       - name: Create ZIP package
         run: |
-          SDK_PATH="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
-          zip -r macos_sdk.zip "$SDK_PATH"
+          SDK_PATH="Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
+          zip -r iPhoneOS_sdk.zip "$SDK_PATH"
 
       - name: Upload SDK package as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: macos-sdk-package
-          path: macos_sdk.zip
+          name: sdk-package
+          path: iPhoneOS_sdk.zip
