@@ -1,7 +1,3 @@
-# Copyright (c) 2023-2024 iFarbod. All Rights Reserved.
-#
-# SPDX-License-Identifier: GPL-3.0-or-later
-
 name: CI
 
 on:
@@ -13,14 +9,22 @@ on:
 
 jobs:
   macos-build:
-    runs-on: macos-latest
+    strategy:
+      matrix:
+        os: [macos-latest, macos-15-intel]
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v7
         with:
-          fetch-depth: 0 # run a shallow clone
+          fetch-depth: 0 # Full history for versioning/git tools
 
       - name: Compile
         run: |
           clang++ -v -o HelloWorld b.mm -framework Cocoa
 
+      - name: Upload HelloWorld Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: HelloWorld-${{ matrix.os }}
+          path: HelloWorld
