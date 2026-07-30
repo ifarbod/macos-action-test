@@ -21,7 +21,6 @@ jobs:
 
       - name: Compile
         run: |
-          ./freestanding
           clang++ -v -o HelloWorld b.mm -framework Cocoa
 
       - name: Upload HelloWorld Artifact
