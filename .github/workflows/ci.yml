@@ -40,7 +40,7 @@ jobs:
       - name: Create ZIP package
         run: |
           SDK_PATH="$(xcode-select -p)/Platforms/${{ matrix.platform }}.platform/Developer/SDKs/${{ matrix.sdk }}"
-          zip -ry "${{ matrix.name }}_sdk.zip" "$SDK_PATH"
+          zip -r "${{ matrix.name }}_sdk.zip" "$SDK_PATH"
 
       - name: Upload SDK package as artifact
         uses: actions/upload-artifact@v7
