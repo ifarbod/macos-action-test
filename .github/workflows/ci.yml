@@ -9,7 +9,7 @@ on:
 
 jobs:
   package-sdks:
-    runs-on: macos-latest
+    runs-on: xcode-27
     strategy:
       fail-fast: false
       matrix:
