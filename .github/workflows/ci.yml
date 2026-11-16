@@ -8,23 +8,42 @@ on:
       - "**.md"
 
 jobs:
-  macos-build:
+  package-sdks:
+    runs-on: macos-latest
     strategy:
+      fail-fast: false
       matrix:
-        os: [macos-latest, macos-15-intel]
-    runs-on: ${{ matrix.os }}
+        include:
+          - name: macos
+            platform: MacOSX
+            sdk: MacOSX.sdk
+          - name: ios
+            platform: iPhoneOS
+            sdk: iPhoneOS.sdk
+          - name: tvos
+            platform: AppleTVOS
+            sdk: AppleTVOS.sdk
+          - name: visionos
+            platform: XROS
+            sdk: XROS.sdk
 
     steps:
       - uses: actions/checkout@v7
         with:
-          fetch-depth: 0 # Full history for versioning/git tools
+          fetch-depth: 0
 
-      - name: Compile
+      - name: Verify SDK path
         run: |
-          clang++ -v -o HelloWorld b.mm -framework Cocoa
+          SDK_PATH="$(xcode-select -p)/Platforms/${{ matrix.platform }}.platform/Developer/SDKs/${{ matrix.sdk }}"
+          ls -la "$SDK_PATH"
 
-      - name: Upload HelloWorld Artifact
+      - name: Create ZIP package
+        run: |
+          SDK_PATH="$(xcode-select -p)/Platforms/${{ matrix.platform }}.platform/Developer/SDKs/${{ matrix.sdk }}"
+          zip -ry "${{ matrix.name }}_sdk.zip" "$SDK_PATH"
+
+      - name: Upload SDK package as artifact
         uses: actions/upload-artifact@v7
         with:
-          name: HelloWorld-${{ matrix.os }}
-          path: HelloWorld
+          name: ${{ matrix.name }}-sdk-package
+          path: ${{ matrix.name }}_sdk.zip
